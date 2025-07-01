@@ -1,4 +1,4 @@
-# 테스트용 워크플로우 이름 (깃허브 서버가 aws 서버에 인증이 되는지 까지만 테스트)
+# 테스트용 워크플로우 이름
 name: Test AWS Connection
 
 # 트리거 조건 정의
@@ -8,7 +8,7 @@ on:
 
 # 실행할 작업들 정의
 jobs:
-  # test라는 이름의 작업(커스텀 이름)
+  # test라는 이름의 작업
   test:
     # Ubuntu 최신 버전에서 실행
     runs-on: ubuntu-latest
@@ -28,11 +28,11 @@ jobs:
           # GitHub Secrets에 저장된 AWS 리전 정보 사용
           aws-region: ${{ secrets.AWS_REGION }}
 
-      # 2단계: AWS CLI를 사용한 연결 테스트 단계(
+      # 2단계: AWS CLI를 사용한 연결 테스트 단계
       - name: Test AWS CLI
         # 직접 셸 명령어를 실행 (|를 사용하여 멀티라인 명령어를 작성할 수 있다)
         run: |
-        # 2-1단계: 현재 AWS 계정 정보 확인 (자격 증명이 올바른지 테스트)
+          # 2-1단계: 현재 AWS 계정 정보 확인 (자격 증명이 올바른지 테스트)
           aws sts get-caller-identity
-        # 2-2단계: ECR 저장소 존재 여부 확인 (ECR 접근 권한 테스트)
+          # 2-2단계: ECR 저장소 존재 여부 확인 (ECR 접근 권한 테스트)
           aws ecr describe-repositories --repository-names ${{ secrets.ECR_REPOSITORY }}
