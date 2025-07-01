@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.ohgiraffers'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'com.h2database:h2'
+
+    // AWS SDK 버전 관리를 위한 BOM (Bill of Materials) - 모든 AWS SDK 모듈의 버전을 통합 관리
+    implementation platform('software.amazon.awssdk:bom:2.21.29')
+
+    // Amazon S3 파일 업로드/다운로드/삭제 기능을 위한 클라이언트 라이브러리
+    implementation 'software.amazon.awssdk:s3'
+    // Amazon RDS 데이터베이스 연결 및 관리를 위한 클라이언트 라이브러리
+    implementation 'software.amazon.awssdk:rds'
+    // AWS 인증 및 권한 처리를 위한 라이브러리 (액세스 키, IAM 역할 등)
+    implementation 'software.amazon.awssdk:auth'
+
+    // AWS SDK 핵심 기능을 제공하는 공통 라이브러리
+    implementation 'software.amazon.awssdk:aws-core'
+    // AWS 리전(지역) 설정 및 관리를 위한 라이브러리
+    implementation 'software.amazon.awssdk:regions'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

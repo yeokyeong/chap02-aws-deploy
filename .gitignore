@@ -1,0 +1,104 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### 추가 내용 ###
+# 환경변수 파일 (보안상 중요 정보 포함)
+.env
+.env.*
+!.env.example
+application-*.yml
+!application-local.yml
+!application-aws.yml
+
+### AWS 관련 민감 파일들 ###
+*.pem
+*.key
+aws-credentials.txt
+.aws/
+credentials
+config
+
+### Docker 관련 ###
+docker-compose.override.yml
+.dockerignore
+*.log
+
+### Spring Boot 관련 ###
+logs/
+*.log
+application.properties
+application-*.properties
+
+### 파일 업로드 디렉토리 ###
+uploads/
+files/
+images/
+temp/
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+### 실습 과정에서 생성되는 임시 파일들 ###
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+### 학습용 메모 및 임시 파일들 ###
+TODO.md
+NOTES.md
+memo.txt
+test-*.txt
+
+### 실습 가이드 파일들 (교육용 자료) ###
+HOWTO-PHASE-*.md

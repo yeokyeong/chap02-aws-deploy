@@ -1,0 +1,76 @@
+# Spring Boot 애플리케이션 설정
+spring:
+  profiles:
+    # 기본 프로파일을 aws로 설정
+    active: aws
+  # 데이터베이스 연결 설정
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${RDS_ENDPOINT:localhost:5432}/${RDS_DATABASE:ohgi_restaurant}
+    username: ${RDS_USERNAME:ohgiraffers}
+    password: ${RDS_PASSWORD:ohgiraffers}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update # 기존 데이터 보존하며 스키마 변경사항만 반영
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # SQL 초기화 설정
+  sql:
+    init:
+      mode: always  # 애플리케이션 시작시 더미 데이터 자동 로드
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      encoding: UTF-8
+
+  # 파일 업로드 설정
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# AWS 설정
+aws:
+  region: ap-northeast-2
+  credentials:
+    access-key: ${AWS_ACCESS_KEY_ID:}
+    secret-key: ${AWS_SECRET_ACCESS_KEY:}
+  s3:
+    bucket: ${AWS_S3_BUCKET:menu-images-2025-ohgi}
+
+# 서버 설정
+server:
+  port: 8080
+
+# Spring Boot Actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+
+# 로깅 설정
+logging:
+  level:
+    com.ohgiraffers.awsdeploy: DEBUG
+    org.springframework.web: DEBUG
+
+# 파일 업로드 경로 설정 (build 폴더 직접 사용)
+file:
+  upload:
+    path: build/resources/main/static/images/

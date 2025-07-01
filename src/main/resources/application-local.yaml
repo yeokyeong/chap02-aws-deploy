@@ -1,0 +1,12 @@
+# application-local.yaml
+# 로컬 개발 환경 설정
+
+# 로컬 환경용 데이터 로드 설정
+spring:
+  sql:
+    init:
+      data-locations: classpath:data-local.sql
+
+file:
+  upload-dir: uploads/
+  base-url: /api/images/ 
